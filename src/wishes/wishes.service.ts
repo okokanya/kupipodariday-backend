@@ -15,6 +15,9 @@ import { Wish } from './entities/wishes.entity';
 
 @Injectable()
 export class WishesService {
+  save(item: Wish) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Wish)
     private wishesRepository: Repository<Wish>,
@@ -56,9 +59,12 @@ export class WishesService {
       relations: { owner: true, offers: true },
       where: { id },
     });
+
+    // Не забудьте про ограничения на редактирование и удаление «хотелок»: нельзя изменять или удалять чужие «хотелки», а также изменять стоимость, если уже есть желающие скинуться. 
+
     if (dto.price && wish.raised > 0) {
       throw new ForbiddenException(
-        'Вы не можете изменять стоимость подарка, если уже есть желающие скинуться',
+        'Вы не можете изменять стоимость подарка',
       );
     }
     if (wish?.owner?.id !== userId || wish.offers.length) {

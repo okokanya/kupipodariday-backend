@@ -21,13 +21,27 @@ export class OffersService {
     if (+item.raised + dto.amount > item.price || item.owner.id === user.id) {
       throw new BadRequestException(appErrors.WRONG_DATA);
     }
+
+    // Обновляем raised у wish перед созданием offer
+    const updatedWish = await this.wishesService.update(
+      dto.itemId,
+      {
+        raised: Number(item.raised) + dto.amount,
+      },
+      user.id,
+    ); // Передаем userId третьим аргументом
+
     const { id } = await this.offerRepository.save({
       user,
       item,
       ...dto,
     });
 
-    return await this.offerRepository.findBy({ id });
+    // Возвращаем нужные данные, например, id нового offer и обновленный wish
+    return {
+      offer: await this.offerRepository.findBy({ id }),
+      updatedWish,
+    };
   }
 
   async findOne(id: number) {

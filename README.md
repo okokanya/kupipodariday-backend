@@ -11,3 +11,8 @@
 -- npm i</br>
 -- npm run start</br>
 -- запускается на 3001 порте</br>
+
+</br>
+описание api</br>
+</br>
+https://app.swaggerhub.com/apis/zlocate/KupiPodariDay/1.0.0
