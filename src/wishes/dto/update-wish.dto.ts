@@ -1,4 +1,5 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateWishDto } from './create-wish.dto';
+export class UpdateWishDto {
+  price?: number;
 
-export class UpdateWishDto extends PartialType(CreateWishDto) {}
+  description?: string;
+}
