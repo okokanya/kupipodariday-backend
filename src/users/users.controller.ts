@@ -14,7 +14,6 @@ export class UsersController {
   @UseGuards(JwtGuard)
   @Get('me')
   async getMe(@Req() req) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...rest } = await this.usersService.findOne(
       'id',
       req.user.id,
