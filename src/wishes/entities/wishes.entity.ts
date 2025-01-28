@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
   OneToMany,
-  Generated,
   VirtualColumn,
 } from 'typeorm';
 import { Length, IsUrl } from 'class-validator';
